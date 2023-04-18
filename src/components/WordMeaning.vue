@@ -5,7 +5,7 @@
             <span class="word-definition__line"></span>
         </p>
         <h4 class="word-definition__title">Meaning</h4>
-        <div v-for="(def, i) in definitions" :key="i">
+        <div v-for="(def, i) in definitions" :key="i" class="word-definition__wrapper">
             <p class="word-definition__text"><span></span> {{ def.definition }}</p>
             <small class="word-definition__example">{{ def.example }}</small>
         </div>
@@ -26,6 +26,10 @@ defineProps({
 .word-definition {
     margin-top: 39px;
 
+    &__wrapper {
+        margin-bottom: 13px;
+    }
+
     &__title {
         margin-top: 40px;
         margin-bottom: 24px;
@@ -38,6 +42,7 @@ defineProps({
         font-size: 18px;
         line-height: 24px;
         color: var(--white-400);
+        padding-bottom: 13px;
     }
 
     &__type {

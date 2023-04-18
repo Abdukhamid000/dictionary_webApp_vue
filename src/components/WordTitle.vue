@@ -4,7 +4,7 @@
             <h1 class="title__text"> {{ title }}</h1>
             <p class="title__transcription">{{ transcription }}</p>
         </div>
-        <div class="voice" v-show="false">
+        <div class="voice" v-show="audio" @click="playAudio">
             <img src="../assets/play.svg" alt="play">
         </div>
     </div>
@@ -12,10 +12,17 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
     title: String,
-    transcription: String
+    transcription: String,
+    audio: Array,
 })
+
+const playAudio = () => {
+    console.log(props.audio[0]);
+    const playBtn = new Audio(props.audio[0].audio)
+    playBtn.play()
+}
 
 </script>
 

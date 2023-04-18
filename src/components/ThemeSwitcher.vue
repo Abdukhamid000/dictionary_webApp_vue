@@ -1,6 +1,6 @@
 <template>
     <label class="switch">
-        <input type="checkbox" @change="toggleTheme" checked="isToggleChecked" />
+        <input type="checkbox" v-model="isDark" />
         <span class="switch__slider"></span>
     </label>
 </template>
@@ -8,16 +8,11 @@
 <script setup>
 import { watch, ref, onMounted } from 'vue'
 const isDark = ref(false)
-const isToggleChecked = ref(false)
-
-const toggleTheme = (e) => {
-    isDark.value = e.target.checked
-}
 
 onMounted(() => {
-    if (localStorage.getItem('dark')) {
-        document.body.classList.add(localStorage.getItem('dark'))
-        if (localStorage.getItem('dark') === 'dark') isToggleChecked.value = true
+    if (localStorage.getItem('dark') === "enabled") {
+        document.body.classList.add('dark')
+        isDark.value = true
     }
 }),
 
@@ -25,13 +20,10 @@ onMounted(() => {
     watch(isDark, (val) => {
         if (val) {
             document.body.classList.add('dark')
-            localStorage.setItem('dark', 'dark')
-
+            localStorage.setItem('dark', "enabled")
         } else {
-            console.log('work');
             document.body.classList.remove('dark')
-            localStorage.setItem('dark', 'notDark')
-            isToggleChecked.value = false
+            localStorage.setItem('dark', "disabled")
         }
     })
 
@@ -50,6 +42,7 @@ onMounted(() => {
     display: inline-block;
     width: 40px;
     height: 20px;
+    margin: 0 20px;
 }
 
 .switch input {
