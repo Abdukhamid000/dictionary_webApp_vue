@@ -67,7 +67,10 @@ const foundAudio = computed(() => {
 
 <style lang="css" scoped>
 .loader {
-    position: relative;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 50%);
     width: 150px;
     hegiht: 150px;
     animation: rotate 2s linear infinite;

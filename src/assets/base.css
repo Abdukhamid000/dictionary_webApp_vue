@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
 :root {
   --black-300: #1f1f1f;
   --black-200: #2d2d2d;
@@ -26,6 +30,7 @@
 body {
   font-family: sans-serif;
   background-color: var(--white-100);
+  font-family: 'Inter', sans-serif;
 }
 
 li {

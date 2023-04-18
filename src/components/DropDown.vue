@@ -26,9 +26,23 @@ const closeDropdown = (e) => {
     eve = e
 }
 
+const injectFont = (fontType) => {
+    switch (fontType) {
+        case 'Sans Serif':
+            document.body.style.fontFamily = "'Inter', sans-serif"
+            break;
+        case 'Serif':
+            document.body.style.fontFamily = "'Lora', serif"
+            break;
+        case 'Mono':
+            document.body.style.fontFamily = "'Roboto Mono', monospace";
+    }
+}
+
 const choseOption = (e) => {
     if (e.target.tagName === "LI") {
         font.value = e.target.textContent
+        injectFont(e.target.textContent)
         eve.target.checked = false
     }
 }
