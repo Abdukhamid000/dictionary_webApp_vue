@@ -34,7 +34,8 @@ const playAudio = () => {
 .voice {
   width: 75px;
   height: 75px;
-  background-color: #2c153f;
+  // background-color: #2c153f;
+  background-color: #E8D1FB;
   border-radius: 50%;
   position: relative;
   cursor: pointer;

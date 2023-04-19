@@ -41,6 +41,7 @@ defineProps({
     color: var(--white-400);
     padding-bottom: 13px;
 
+
     @media (max-width: 768px) {
       font-size: 15px;
     }
@@ -52,6 +53,8 @@ defineProps({
     column-gap: 20px;
     font-size: 24px;
     line-height: 29px;
+    font-weight: 700;
+    white-space: nowrap;
     color: var(--black-200);
 
     @media (max-width: 768px) {
