@@ -130,6 +130,7 @@ const choseOption = (e) => {
 
     li {
       transition: all 0.3s ease;
+      font-family: var(--mono)
     }
 
     li:hover {
@@ -138,11 +139,11 @@ const choseOption = (e) => {
     }
 
     li:first-child {
-      font-family: 'Lora, serif';
+      font-family: var(--sansSerif);
     }
 
     li:nth-child(2) {
-      font-family: 'Lora, serif';
+      font-family: var(--serif);
     }
   }
 
