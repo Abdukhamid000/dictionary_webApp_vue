@@ -1,30 +1,36 @@
 <template>
   <DictionaryHeader />
-  <SearchInput @save-input="userInput" />
-  <NoDefintionFound v-if="isError" :errorMessage="errorMsg" />
+  <SearchInput @save-input="userInput" :inputVal="searchVal" />
+  <NoDefintionFound v-if="isError" />
   <template v-else>
     <svg v-if="isLoading" class="loader">
       <circle cx="70" cy="70" r="70"></circle>
     </svg>
     <template v-else>
       <WordTitle :title="wordInfo.word" :transcription="wordInfo.phonetic" :audio="foundAudio" />
-      <WordMeaning v-for="(meaning, i) in wordInfo.wordMeaning" :key="i" :type="meaning.partOfSpeech"
-        :definitions="meaning.definitions" />
+      <WordMeaning
+        v-for="(meaning, i) in wordInfo.wordMeaning"
+        :key="i"
+        :type="meaning.partOfSpeech"
+        :definitions="meaning.definitions"
+      />
     </template>
-    <WordSource :source="wordInfo.sourceUrls" />
   </template>
+  <WordSource :source="wordInfo.sourceUrls" />
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue'
-import DictionaryHeader from './DictionaryHeader.vue'
-import SearchInput from './SearchInput.vue'
-import WordMeaning from './WordMeaning.vue'
-import WordTitle from './WordTitle.vue'
-import NoDefintionFound from './NoDefinitionFound.vue'
-import WordSource from './WordSource.vue'
-import { useRouter } from 'vue-router'
+import { reactive, ref, computed, onMounted } from 'vue'
+import DictionaryHeader from '../components/DictionaryHeader.vue'
+import SearchInput from '../components/SearchInput.vue'
+import WordMeaning from '../components/WordMeaning.vue'
+import WordTitle from '../components/WordTitle.vue'
+import NoDefintionFound from '../components/NoDefinitionFound.vue'
+import WordSource from '../components/WordSource.vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const searchVal = ref()
+const route = useRoute()
 const router = useRouter()
 const wordInfo = reactive({
   wordMeaning: [],
@@ -35,14 +41,12 @@ const wordInfo = reactive({
 })
 const isLoading = ref(false)
 const isError = ref(false)
-const errorMsg = ref('')
 const getWordInfo = async (word) => {
-  router.push({ path: 'search', query: { word } })
+  router.push({ query: { word } })
   isLoading.value = true
   try {
     const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${word}`)
     const data = await res.json()
-
     if (res.status === 404) {
       throw new Error(data.title)
     }
@@ -50,23 +54,26 @@ const getWordInfo = async (word) => {
     wordInfo.phonetic = data[0].phonetic
     wordInfo.audio = data[0].phonetics
     wordInfo.wordMeaning = data[0].meanings
-    wordInfo.sourceUrl = data[0].sourceUrls
+    wordInfo.sourceUrls = data[0].sourceUrls
     wordInfo.word = data[0].word
     isLoading.value = false
   } catch (err) {
     isLoading.value = false
-    errorMsg.value = err.message
     isError.value = true
   }
 }
-
 const userInput = (val) => {
   isLoading.value = true
   getWordInfo(val)
 }
-
 const foundAudio = computed(() => {
   return wordInfo.audio?.filter((item) => item.audio !== '')
+})
+
+onMounted(() => {
+  const query = route.query.word
+  getWordInfo(query)
+  searchVal.value = query
 })
 </script>
 
@@ -105,7 +112,6 @@ const foundAudio = computed(() => {
 }
 
 @keyframes animate {
-
   0%,
   100% {
     stroke-dashoffset: 440;

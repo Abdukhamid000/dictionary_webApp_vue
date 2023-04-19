@@ -1,11 +1,12 @@
 <template>
   <div class="test">
-    <DictionaryApp />
+    <!-- <DictionaryApp /> -->
+    <RouterView />
   </div>
 </template>
 
 <script setup>
-import DictionaryApp from './components/DictionaryApp.vue';
+// import DictionaryApp from './components/DictionaryApp.vue';
 </script>
 
 <style lang="scss"></style>
