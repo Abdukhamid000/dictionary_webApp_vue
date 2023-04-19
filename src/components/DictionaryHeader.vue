@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img src="../assets/logo.svg" alt="logo" />
+    <img class="logo" src="../assets/logo.svg" alt="logo" />
     <div class="header__theme">
       <DropDown />
       <ThemeSwitcher />
@@ -15,6 +15,10 @@ import ThemeSwitcher from './ThemeSwitcher.vue'
 </script>
 
 <style lang="scss" scoped>
+.logo {
+  cursor: pointer;
+}
+
 .header {
   display: flex;
   align-items: center;
