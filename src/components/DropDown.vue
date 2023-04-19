@@ -128,6 +128,15 @@ const choseOption = (e) => {
       height: 152px;
     }
 
+    li {
+      transition: all 0.3s ease;
+    }
+
+    li:hover {
+
+      color: var(--purple);
+    }
+
     li:first-child {
       font-family: 'Lora, serif';
     }
