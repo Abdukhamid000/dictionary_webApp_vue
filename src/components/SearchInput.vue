@@ -1,13 +1,7 @@
 <template>
   <div class="searchField">
-    <input
-      class="searchField__input"
-      :value="inputVal"
-      @input="debounced($event)"
-      placeholder="Search for any word…"
-      type="text"
-      data-input
-    />
+    <input class="searchField__input" :value="inputVal" @input="debounced($event)" placeholder="Search for any word…"
+      type="text" data-input />
     <img src="../assets/search.svg" alt="search" />
   </div>
 </template>
@@ -22,12 +16,12 @@ defineProps({
 
 const debounced = debounce((e) => {
   const val = e.target.value
-  // if (val.trim() !== '') {
+  if (val.trim() !== '') {
   e.target.style.border = '1px solid #a445ed'
   emit('save-input', val)
-  // } else {
-  //     e.target.style.border = '1px solid #ff5252'
-  // }
+  } else {
+      e.target.style.border = '1px solid #ff5252'
+  }
 }, 1000)
 </script>
 

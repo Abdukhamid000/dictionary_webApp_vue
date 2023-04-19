@@ -38,24 +38,26 @@ const isLoading = ref(false)
 const isError = ref(false)
 const haveSource = ref(false)
 const getWordInfo = async (word) => {
-  router.push({ query: { word } })
-  isLoading.value = true
-  try {
-    const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${word}`)
-    const data = await res.json()
-    if (res.status === 404) {
-      throw new Error(data.title)
+  if (word) {
+    router.push({ query: { word } })
+    isLoading.value = true
+    try {
+      const res = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/${word}`)
+      const data = await res.json()
+      if (res.status === 404) {
+        throw new Error(data.title)
+      }
+      isError.value = false
+      wordInfo.phonetic = data[0].phonetic
+      wordInfo.audio = data[0].phonetics
+      wordInfo.wordMeaning = data[0].meanings
+      wordInfo.word = data[0].word
+      haveSource.value = true
+      isLoading.value = false
+    } catch (err) {
+      isLoading.value = false
+      isError.value = true
     }
-    isError.value = false
-    wordInfo.phonetic = data[0].phonetic
-    wordInfo.audio = data[0].phonetics
-    wordInfo.wordMeaning = data[0].meanings
-    wordInfo.word = data[0].word
-    haveSource.value = true
-    isLoading.value = false
-  } catch (err) {
-    isLoading.value = false
-    isError.value = true
   }
 }
 const userInput = (val) => {
