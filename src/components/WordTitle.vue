@@ -18,7 +18,6 @@ const props = defineProps({
 })
 
 const playAudio = () => {
-  console.log(props.audio[0])
   const playBtn = new Audio(props.audio[0].audio)
   playBtn.play()
 }
@@ -39,6 +38,20 @@ const playAudio = () => {
   border-radius: 50%;
   position: relative;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+
+    img {
+      width: 13px;
+    }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   img {
     position: absolute;
@@ -54,6 +67,11 @@ const playAudio = () => {
     font-size: 64px;
     line-height: 82px;
     color: var(--black-200);
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      line-height: 41px;
+    }
   }
 
   &__transcription {
@@ -61,6 +79,11 @@ const playAudio = () => {
     font-size: 24px;
     line-height: 29px;
     color: var(--purple);
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 }
 </style>

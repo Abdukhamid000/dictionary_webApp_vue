@@ -16,7 +16,7 @@
       />
     </template>
   </template>
-  <WordSource :source="wordInfo.sourceUrls" />
+  <!-- <WordSource :source="wordInfo.sourceUrls" /> -->
 </template>
 
 <script setup>
@@ -26,7 +26,7 @@ import SearchInput from '../components/SearchInput.vue'
 import WordMeaning from '../components/WordMeaning.vue'
 import WordTitle from '../components/WordTitle.vue'
 import NoDefintionFound from '../components/NoDefinitionFound.vue'
-import WordSource from '../components/WordSource.vue'
+// import WordSource from '../components/WordSource.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const searchVal = ref()

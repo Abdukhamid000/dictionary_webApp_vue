@@ -40,6 +40,10 @@ defineProps({
     line-height: 24px;
     color: var(--white-400);
     padding-bottom: 13px;
+
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 
   &__type {
@@ -49,6 +53,11 @@ defineProps({
     font-size: 24px;
     line-height: 29px;
     color: var(--black-200);
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      line-height: 23px;
+    }
   }
 
   &__line {
@@ -66,6 +75,10 @@ defineProps({
     display: flex;
     align-items: center;
     column-gap: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
 
     span {
       display: block;

@@ -20,11 +20,17 @@
 import { ref, onMounted } from 'vue'
 
 const font = ref('Sans Serif')
-let eve = null
+let temp = null
 
 const closeDropdown = (e) => {
-  eve = e
+  temp = e
 }
+
+window.addEventListener('click', (e) => {
+  if (e.target.id !== 'dropdown' && temp !== null && temp.target.checked) {
+    temp.target.checked = false
+  }
+})
 
 onMounted(() => {
   if (localStorage.getItem('font')) {
@@ -59,7 +65,7 @@ const choseOption = (e) => {
   if (e.target.tagName === 'LI') {
     font.value = e.target.textContent
     injectFont(e.target.textContent)
-    eve.target.checked = false
+    temp.target.checked = false
   }
 }
 </script>
@@ -76,6 +82,11 @@ const choseOption = (e) => {
   padding-top: 5px;
   padding-bottom: 5px;
   border-right: 1px solid #e9e9e9;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 24px;
+  }
 
   &__text {
     color: var(--black-200);
@@ -112,6 +123,11 @@ const choseOption = (e) => {
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.93, 0.88, 0.1, 0.8);
 
+    @media (max-width: 768px) {
+      width: 133px;
+      height: 152px;
+    }
+
     li:first-child {
       font-family: 'Lora, serif';
     }
@@ -136,7 +152,7 @@ const choseOption = (e) => {
   input {
     display: none;
 
-    &:checked ~ .dropdown__items {
+    &:checked~.dropdown__items {
       top: calc(100%);
       z-index: 99;
       visibility: visible;

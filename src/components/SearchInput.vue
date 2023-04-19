@@ -8,7 +8,7 @@
       type="text"
       data-input
     />
-    <img src="../assets/search.svg" alt="sarch" />
+    <img src="../assets/search.svg" alt="search" />
   </div>
 </template>
 
