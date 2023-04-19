@@ -8,15 +8,11 @@
     </svg>
     <template v-else>
       <WordTitle :title="wordInfo.word" :transcription="wordInfo.phonetic" :audio="foundAudio" />
-      <WordMeaning
-        v-for="(meaning, i) in wordInfo.wordMeaning"
-        :key="i"
-        :type="meaning.partOfSpeech"
-        :definitions="meaning.definitions"
-      />
+      <WordMeaning v-for="(meaning, i) in wordInfo.wordMeaning" :key="i" :type="meaning.partOfSpeech"
+        :definitions="meaning.definitions" />
     </template>
   </template>
-  <!-- <WordSource :source="wordInfo.sourceUrls" /> -->
+  <WordSource v-if="haveSource && !isError" />
 </template>
 
 <script setup>
@@ -26,7 +22,7 @@ import SearchInput from '../components/SearchInput.vue'
 import WordMeaning from '../components/WordMeaning.vue'
 import WordTitle from '../components/WordTitle.vue'
 import NoDefintionFound from '../components/NoDefinitionFound.vue'
-// import WordSource from '../components/WordSource.vue'
+import WordSource from '../components/WordSource.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const searchVal = ref()
@@ -37,10 +33,10 @@ const wordInfo = reactive({
   word: '',
   phonetic: '',
   audio: null,
-  sourceUrls: []
 })
 const isLoading = ref(false)
 const isError = ref(false)
+const haveSource = ref(false)
 const getWordInfo = async (word) => {
   router.push({ query: { word } })
   isLoading.value = true
@@ -54,8 +50,8 @@ const getWordInfo = async (word) => {
     wordInfo.phonetic = data[0].phonetic
     wordInfo.audio = data[0].phonetics
     wordInfo.wordMeaning = data[0].meanings
-    wordInfo.sourceUrls = data[0].sourceUrls
     wordInfo.word = data[0].word
+    haveSource.value = true
     isLoading.value = false
   } catch (err) {
     isLoading.value = false
@@ -73,6 +69,7 @@ const foundAudio = computed(() => {
 onMounted(() => {
   const query = route.query.word
   getWordInfo(query)
+  haveSource.value = false
   searchVal.value = query
 })
 </script>
@@ -112,6 +109,7 @@ onMounted(() => {
 }
 
 @keyframes animate {
+
   0%,
   100% {
     stroke-dashoffset: 440;

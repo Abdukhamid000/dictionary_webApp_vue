@@ -1,11 +1,12 @@
 <template>
-  <div v-show="source.length !== 0">
-    <p class="source">Source: <a href="source[0]">{{ source[0] }}</a></p>
+  <div>
+    <p class="source">Source: <a
+        href="https://en.wiktionary.org/wiki/keyboard">https://en.wiktionary.org/wiki/keyboard</a></p>
   </div>
 </template>
 
 <script setup>
-defineProps(['source'])
+
 </script>
 
 <style lang="scss">
