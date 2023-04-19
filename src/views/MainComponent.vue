@@ -13,7 +13,7 @@
       <WordSynonyms :syn="wordInfo.synonyms" />
     </template>
   </template>
-  <WordSource v-if="haveSource && !isError" />
+  <WordSource v-if="haveSource && !isError && !isLoading" />
 </template>
 
 <script setup>

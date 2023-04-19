@@ -82,7 +82,8 @@ defineProps({
 
     span {
       display: block;
-      width: 5px;
+      width: 100%;
+      max-width: 5px;
       height: 5px;
       background-color: var(--purple);
       border-radius: 50%;
