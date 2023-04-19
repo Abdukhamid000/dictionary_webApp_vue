@@ -10,6 +10,7 @@
       <WordTitle :title="wordInfo.word" :transcription="wordInfo.phonetic" :audio="foundAudio" />
       <WordMeaning v-for="(meaning, i) in wordInfo.wordMeaning" :key="i" :type="meaning.partOfSpeech"
         :definitions="meaning.definitions" />
+      <WordSynonyms :syn="wordInfo.synonyms" />
     </template>
   </template>
   <WordSource v-if="haveSource && !isError" />
@@ -24,6 +25,7 @@ import WordTitle from '../components/WordTitle.vue'
 import NoDefintionFound from '../components/NoDefinitionFound.vue'
 import WordSource from '../components/WordSource.vue'
 import { useRoute, useRouter } from 'vue-router'
+import WordSynonyms from '../components/WordSynonyms.vue'
 
 const searchVal = ref()
 const route = useRoute()
@@ -33,6 +35,7 @@ const wordInfo = reactive({
   word: '',
   phonetic: '',
   audio: null,
+  synonyms: ''
 })
 const isLoading = ref(false)
 const isError = ref(false)
@@ -52,6 +55,7 @@ const getWordInfo = async (word) => {
       wordInfo.audio = data[0].phonetics
       wordInfo.wordMeaning = data[0].meanings
       wordInfo.word = data[0].word
+      wordInfo.synonyms = data[0].meanings[0].synonyms
       haveSource.value = true
       isLoading.value = false
     } catch (err) {
